@@ -1,0 +1,832 @@
+{
+	"info": {
+		"_postman_id": "ee90696c-6e0e-49ed-aff8-7e9fc023ae1b",
+		"name": "AMAZON vs FBA 360 Calc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AMAZON - weight less than 1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a6cb6682-74cf-475e-a4dd-272036dda63d",
+						"exec": [
+							"numbers = [];",
+							"numbers.push(parseFloat((_.random(0.01, 79.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.02, 88.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.01, 120.502)).toFixed(2)));",
+							"numbers.sort((a, b) => a - b);",
+							"",
+							"pm.variables.get(\"variable_key\");",
+							"pm.environment.set(\"LS\", numbers.pop());",
+							"pm.environment.set(\"MS\", numbers.pop());",
+							"pm.environment.set(\"SS\", numbers.pop());",
+							"",
+							"let weight = parseFloat((_.random(0.01, 1)).toFixed(2))",
+							"pm.environment.set(\"W\", weight);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f64ae6d-02bd-4321-b187-1c363597e36b",
+						"exec": [
+							"var bodyRes = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFutureFees.pickAndPackFee.amount)",
+							"pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFees.pickAndPackFee.amount);",
+							"setTimeout(()=>console.log('sleeping 2 seconds'), 2000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productInfoMapping\": {\r\n\t\t\"isWhiteGloveRequired\": false,\r\n\t\t\"weightUnitString\": \"pounds\",\r\n\t\t\"gl\": \"gl_camera\",\r\n\t\t\"dimensionUnit\": \"inches\",\r\n\t\t\"length\": {{MS}},\r\n\t\t\"weight\": {{W}},\r\n\t\t\"dimensionUnitString\": \"inches\",\r\n\t\t\"width\": {{SS}},\r\n\t\t\"asin\": \"B0083WYG5W\",\r\n\t\t\"height\": {{LS}},\r\n\t\t\"weightUnit\": \"pounds\"\r\n\t},\r\n\t\"afnPriceStr\": 0,\r\n\t\"mfnPriceStr\": 0,\r\n\t\"mfnShippingPriceStr\": 0,\r\n\t\"currency\": \"USD\",\r\n\t\"marketPlaceId\": \"ATVPDKIKX0DER\",\r\n\t\"hasFutureFee\": true,\r\n\t\"hasTaxPage\": true\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "https://sellercentral.amazon.com/fba/profitabilitycalculator/getafnfee?profitcalcToken=gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////",
+					"protocol": "https",
+					"host": [
+						"sellercentral",
+						"amazon",
+						"com"
+					],
+					"path": [
+						"fba",
+						"profitabilitycalculator",
+						"getafnfee"
+					],
+					"query": [
+						{
+							"key": "profitcalcToken",
+							"value": "gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Using 360 fba calculator results match with Amazon when weight is less than 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"let jsonRes = JSON.parse(responseBody);\r",
+							"let shortSide = pm.environment.get(\"SS\");\r",
+							"let medianSide = pm.environment.get(\"MS\");\r",
+							"let longestSide = pm.environment.get(\"LS\");\r",
+							"let weight = pm.environment.get(\"W\");\r",
+							"amazonFee = pm.environment.get(\"AMAZONFEE\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(`Using SS: ${shortSide}, MS: ${medianSide}, LS: ${longestSide} and  WEIGHT: ${weight}, FULFILLMENT FEE should be equal to: '${amazonFee}'`, () => {\r",
+							"    feeAct = parseFloat((jsonRes.fbaFee).toFixed(2));\r",
+							"    pm.expect(feeAct, 'some message.....').to.eql(amazonFee);\r",
+							"});\r",
+							"\r",
+							"console.log(`FULFILLMENT FEE from 360 FBA application: '${feeAct}'`)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2128a696-28a0-4f4a-86bb-a9f65d5c28b4",
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"\",\n\t\"shortestSide\":{{SS}},\n\t\"medianSide\":{{MS}},\n\t\"longestSide\":{{LS}},\n\t\"weight\":{{W}}\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/calculator?marketplace=US&sizeUnit={{SIZEUNIT}}&weightUnit={{WEIGHTUNIT}}&dangerousGoods=false",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"calculator"
+					],
+					"query": [
+						{
+							"key": "marketplace",
+							"value": "US"
+						},
+						{
+							"key": "sizeUnit",
+							"value": "{{SIZEUNIT}}"
+						},
+						{
+							"key": "weightUnit",
+							"value": "{{WEIGHTUNIT}}"
+						},
+						{
+							"key": "dangerousGoods",
+							"value": "false"
+						}
+					]
+				},
+				"description": "Description: Using 360 fba calculator results match with Amazon when weight is less than 1"
+			},
+			"response": []
+		},
+		{
+			"name": "AMAZON - weight equal 1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a6cb6682-74cf-475e-a4dd-272036dda63d",
+						"exec": [
+							"numbers = [];",
+							"numbers.push(parseFloat((_.random(0.01, 79.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.02, 88.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.01, 120.502)).toFixed(2)));",
+							"numbers.sort((a, b) => a - b);",
+							"",
+							"pm.variables.get(\"variable_key\");",
+							"pm.environment.set(\"LS\", numbers.pop());",
+							"pm.environment.set(\"MS\", numbers.pop());",
+							"pm.environment.set(\"SS\", numbers.pop());",
+							"",
+							"let weight = 1;",
+							"pm.environment.set(\"W\", weight);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f64ae6d-02bd-4321-b187-1c363597e36b",
+						"exec": [
+							"var bodyRes = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFutureFees.pickAndPackFee.amount)",
+							"pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFees.pickAndPackFee.amount)",
+							"setTimeout(()=>console.log('sleeping 2 seconds'), 2000);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productInfoMapping\": {\r\n\t\t\"isWhiteGloveRequired\": false,\r\n\t\t\"weightUnitString\": \"pounds\",\r\n\t\t\"gl\": \"gl_camera\",\r\n\t\t\"dimensionUnit\": \"inches\",\r\n\t\t\"length\": {{MS}},\r\n\t\t\"weight\": {{W}},\r\n\t\t\"dimensionUnitString\": \"inches\",\r\n\t\t\"width\": {{SS}},\r\n\t\t\"asin\": \"B0083WYG5W\",\r\n\t\t\"height\": {{LS}},\r\n\t\t\"weightUnit\": \"pounds\"\r\n\t},\r\n\t\"afnPriceStr\": 0,\r\n\t\"mfnPriceStr\": 0,\r\n\t\"mfnShippingPriceStr\": 0,\r\n\t\"currency\": \"USD\",\r\n\t\"marketPlaceId\": \"ATVPDKIKX0DER\",\r\n\t\"hasFutureFee\": true,\r\n\t\"hasTaxPage\": true\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "https://sellercentral.amazon.com/fba/profitabilitycalculator/getafnfee?profitcalcToken=gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////",
+					"protocol": "https",
+					"host": [
+						"sellercentral",
+						"amazon",
+						"com"
+					],
+					"path": [
+						"fba",
+						"profitabilitycalculator",
+						"getafnfee"
+					],
+					"query": [
+						{
+							"key": "profitcalcToken",
+							"value": "gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Using 360 fba calculator results match with Amazon when weight equal to 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"let jsonRes = JSON.parse(responseBody);\r",
+							"let shortSide = pm.environment.get(\"SS\");\r",
+							"let medianSide = pm.environment.get(\"MS\");\r",
+							"let longestSide = pm.environment.get(\"LS\");\r",
+							"let weight = pm.environment.get(\"W\");\r",
+							"amazonFee = pm.environment.get(\"AMAZONFEE\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(`Using SS: ${shortSide}, MS: ${medianSide}, LS: ${longestSide} and  WEIGHT: ${weight}, FULFILLMENT FEE should be equal to: '${amazonFee}'`, () => {\r",
+							"    feeAct = parseFloat((jsonRes.fbaFee).toFixed(2));\r",
+							"    pm.expect(feeAct, 'Fulfillment fee not match').to.equal(amazonFee);\r",
+							"});\r",
+							"\r",
+							"console.log(`FULFILLMENT FEE from 360 FBA application: '${feeAct}'`)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"\",\n\t\"shortestSide\":{{SS}},\n\t\"medianSide\":{{MS}},\n\t\"longestSide\":{{LS}},\n\t\"weight\":{{W}}\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/calculator?marketplace=US&sizeUnit={{SIZEUNIT}}&weightUnit={{WEIGHTUNIT}}&dangerousGoods=false",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"calculator"
+					],
+					"query": [
+						{
+							"key": "marketplace",
+							"value": "US"
+						},
+						{
+							"key": "sizeUnit",
+							"value": "{{SIZEUNIT}}"
+						},
+						{
+							"key": "weightUnit",
+							"value": "{{WEIGHTUNIT}}"
+						},
+						{
+							"key": "dangerousGoods",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AMAZON - between 1 && 150",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a6cb6682-74cf-475e-a4dd-272036dda63d",
+						"exec": [
+							"numbers = [];",
+							"numbers.push(parseFloat((_.random(0.01, 79.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.02, 88.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.01, 120.502)).toFixed(2)));",
+							"numbers.sort((a, b) => a - b);",
+							"",
+							"pm.variables.get(\"variable_key\");",
+							"pm.environment.set(\"LS\", numbers.pop());",
+							"pm.environment.set(\"MS\", numbers.pop());",
+							"pm.environment.set(\"SS\", numbers.pop());",
+							"",
+							"let weight = parseFloat((_.random(1.01, 149.01)).toFixed(2))",
+							"pm.environment.set(\"W\", weight);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f64ae6d-02bd-4321-b187-1c363597e36b",
+						"exec": [
+							"var bodyRes = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFutureFees.pickAndPackFee.amount)",
+							"pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFees.pickAndPackFee.amount)",
+							"setTimeout(()=>console.log('sleeping 2 seconds'), 2000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productInfoMapping\": {\r\n\t\t\"isWhiteGloveRequired\": false,\r\n\t\t\"weightUnitString\": \"pounds\",\r\n\t\t\"gl\": \"gl_camera\",\r\n\t\t\"dimensionUnit\": \"inches\",\r\n\t\t\"length\": {{MS}},\r\n\t\t\"weight\": {{W}},\r\n\t\t\"dimensionUnitString\": \"inches\",\r\n\t\t\"width\": {{SS}},\r\n\t\t\"asin\": \"B0083WYG5W\",\r\n\t\t\"height\": {{LS}},\r\n\t\t\"weightUnit\": \"pounds\"\r\n\t},\r\n\t\"afnPriceStr\": 0,\r\n\t\"mfnPriceStr\": 0,\r\n\t\"mfnShippingPriceStr\": 0,\r\n\t\"currency\": \"USD\",\r\n\t\"marketPlaceId\": \"ATVPDKIKX0DER\",\r\n\t\"hasFutureFee\": true,\r\n\t\"hasTaxPage\": true\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "https://sellercentral.amazon.com/fba/profitabilitycalculator/getafnfee?profitcalcToken=gtq3DNz687aX3xeD5BsXU97DM%2BAdZA4nA5NFal8AAAAJAAAAAFxtbzlyYXcAAAAAFVfwLBerPie4v1Ep////",
+					"protocol": "https",
+					"host": [
+						"sellercentral",
+						"amazon",
+						"com"
+					],
+					"path": [
+						"fba",
+						"profitabilitycalculator",
+						"getafnfee"
+					],
+					"query": [
+						{
+							"key": "profitcalcToken",
+							"value": "gtq3DNz687aX3xeD5BsXU97DM%2BAdZA4nA5NFal8AAAAJAAAAAFxtbzlyYXcAAAAAFVfwLBerPie4v1Ep////"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Using 360 fba calculator results match with Amazon when weight is between 1 and 150",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"let jsonRes = JSON.parse(responseBody);\r",
+							"let shortSide = pm.environment.get(\"SS\");\r",
+							"let medianSide = pm.environment.get(\"MS\");\r",
+							"let longestSide = pm.environment.get(\"LS\");\r",
+							"let weight = pm.environment.get(\"W\");\r",
+							"amazonFee = pm.environment.get(\"AMAZONFEE\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(`Using SS: ${shortSide}, MS: ${medianSide}, LS: ${longestSide} and  WEIGHT: ${weight}, FULFILLMENT FEE should be equal to: '${amazonFee}'`, () => {\r",
+							"    feeAct = parseFloat((jsonRes.fbaFee).toFixed(2));\r",
+							"    pm.expect(feeAct, 'Fulfillment fee not match').to.equal(amazonFee);\r",
+							"});\r",
+							"\r",
+							"console.log(`FULFILLMENT FEE from 360 FBA application: '${feeAct}'`)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"\",\n\t\"shortestSide\":{{SS}},\n\t\"medianSide\":{{MS}},\n\t\"longestSide\":{{LS}},\n\t\"weight\":{{W}}\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/calculator?marketplace=US&sizeUnit={{SIZEUNIT}}&weightUnit={{WEIGHTUNIT}}&dangerousGoods=false",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"calculator"
+					],
+					"query": [
+						{
+							"key": "marketplace",
+							"value": "US"
+						},
+						{
+							"key": "sizeUnit",
+							"value": "{{SIZEUNIT}}"
+						},
+						{
+							"key": "weightUnit",
+							"value": "{{WEIGHTUNIT}}"
+						},
+						{
+							"key": "dangerousGoods",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AMAZON - equal 150",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a6cb6682-74cf-475e-a4dd-272036dda63d",
+						"exec": [
+							"numbers = [];",
+							"numbers.push(parseFloat((_.random(0.01, 79.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.02, 88.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.01, 120.502)).toFixed(2)));",
+							"numbers.sort((a, b) => a - b);",
+							"",
+							"pm.variables.get(\"variable_key\");",
+							"pm.environment.set(\"LS\", numbers.pop());",
+							"pm.environment.set(\"MS\", numbers.pop());",
+							"pm.environment.set(\"SS\", numbers.pop());",
+							"",
+							"let weight = 150;",
+							"pm.environment.set(\"W\", weight);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f64ae6d-02bd-4321-b187-1c363597e36b",
+						"exec": [
+							"var bodyRes = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFutureFees.pickAndPackFee.amount)",
+							"pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFees.pickAndPackFee.amount)",
+							"setTimeout(()=>console.log('sleeping 2 seconds'), 2000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productInfoMapping\": {\r\n\t\t\"isWhiteGloveRequired\": false,\r\n\t\t\"weightUnitString\": \"pounds\",\r\n\t\t\"gl\": \"gl_camera\",\r\n\t\t\"dimensionUnit\": \"inches\",\r\n\t\t\"length\": {{MS}},\r\n\t\t\"weight\": {{W}},\r\n\t\t\"dimensionUnitString\": \"inches\",\r\n\t\t\"width\": {{SS}},\r\n\t\t\"asin\": \"B0083WYG5W\",\r\n\t\t\"height\": {{LS}},\r\n\t\t\"weightUnit\": \"pounds\"\r\n\t},\r\n\t\"afnPriceStr\": 0,\r\n\t\"mfnPriceStr\": 0,\r\n\t\"mfnShippingPriceStr\": 0,\r\n\t\"currency\": \"USD\",\r\n\t\"marketPlaceId\": \"ATVPDKIKX0DER\",\r\n\t\"hasFutureFee\": true,\r\n\t\"hasTaxPage\": true\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "https://sellercentral.amazon.com/fba/profitabilitycalculator/getafnfee?profitcalcToken=gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////",
+					"protocol": "https",
+					"host": [
+						"sellercentral",
+						"amazon",
+						"com"
+					],
+					"path": [
+						"fba",
+						"profitabilitycalculator",
+						"getafnfee"
+					],
+					"query": [
+						{
+							"key": "profitcalcToken",
+							"value": "gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Using 360 fba calculator results match with Amazon when weight is equal to 150",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"let jsonRes = JSON.parse(responseBody);\r",
+							"let shortSide = pm.environment.get(\"SS\");\r",
+							"let medianSide = pm.environment.get(\"MS\");\r",
+							"let longestSide = pm.environment.get(\"LS\");\r",
+							"let weight = pm.environment.get(\"W\");\r",
+							"amazonFee = pm.environment.get(\"AMAZONFEE\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(`Using SS: ${shortSide}, MS: ${medianSide}, LS: ${longestSide} and  WEIGHT: ${weight}, FULFILLMENT FEE should be equal to: '${amazonFee}'`, () => {\r",
+							"    feeAct = parseFloat((jsonRes.fbaFee).toFixed(2));\r",
+							"    pm.expect(feeAct, 'Fulfillment fee not match').to.equal(amazonFee);\r",
+							"});\r",
+							"\r",
+							"console.log(`FULFILLMENT FEE from 360 FBA application: '${feeAct}'`)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"\",\n\t\"shortestSide\":{{SS}},\n\t\"medianSide\":{{MS}},\n\t\"longestSide\":{{LS}},\n\t\"weight\":{{W}}\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/calculator?marketplace=US&sizeUnit={{SIZEUNIT}}&weightUnit={{WEIGHTUNIT}}&dangerousGoods=false",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"calculator"
+					],
+					"query": [
+						{
+							"key": "marketplace",
+							"value": "US"
+						},
+						{
+							"key": "sizeUnit",
+							"value": "{{SIZEUNIT}}"
+						},
+						{
+							"key": "weightUnit",
+							"value": "{{WEIGHTUNIT}}"
+						},
+						{
+							"key": "dangerousGoods",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AMAZON - greather than 150",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a6cb6682-74cf-475e-a4dd-272036dda63d",
+						"exec": [
+							"numbers = [];",
+							"numbers.push(parseFloat((_.random(0.01, 79.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.02, 88.5)).toFixed(2)));",
+							"numbers.push(parseFloat((_.random(0.01, 120.502)).toFixed(2)));",
+							"numbers.sort((a, b) => a - b);",
+							"",
+							"pm.variables.get(\"variable_key\");",
+							"pm.environment.set(\"LS\", numbers.pop());",
+							"pm.environment.set(\"MS\", numbers.pop());",
+							"pm.environment.set(\"SS\", numbers.pop());",
+							"",
+							"let weight = parseFloat((_.random(151.01, 300.01)).toFixed(2))",
+							"pm.environment.set(\"W\", weight);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f64ae6d-02bd-4321-b187-1c363597e36b",
+						"exec": [
+							"var bodyRes = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFutureFees.pickAndPackFee.amount)",
+							"pm.environment.set(\"AMAZONFEE\", bodyRes.data.afnFees.pickAndPackFee.amount)",
+							"setTimeout(()=>console.log('sleeping 2 seconds'), 2000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"productInfoMapping\": {\r\n\t\t\"isWhiteGloveRequired\": false,\r\n\t\t\"weightUnitString\": \"pounds\",\r\n\t\t\"gl\": \"gl_camera\",\r\n\t\t\"dimensionUnit\": \"inches\",\r\n\t\t\"length\": {{MS}},\r\n\t\t\"weight\": {{W}},\r\n\t\t\"dimensionUnitString\": \"inches\",\r\n\t\t\"width\": {{SS}},\r\n\t\t\"asin\": \"B0083WYG5W\",\r\n\t\t\"height\": {{LS}},\r\n\t\t\"weightUnit\": \"pounds\"\r\n\t},\r\n\t\"afnPriceStr\": 0,\r\n\t\"mfnPriceStr\": 0,\r\n\t\"mfnShippingPriceStr\": 0,\r\n\t\"currency\": \"USD\",\r\n\t\"marketPlaceId\": \"ATVPDKIKX0DER\",\r\n\t\"hasFutureFee\": true,\r\n\t\"hasTaxPage\": true\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "https://sellercentral.amazon.com/fba/profitabilitycalculator/getafnfee?profitcalcToken=gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////",
+					"protocol": "https",
+					"host": [
+						"sellercentral",
+						"amazon",
+						"com"
+					],
+					"path": [
+						"fba",
+						"profitabilitycalculator",
+						"getafnfee"
+					],
+					"query": [
+						{
+							"key": "profitcalcToken",
+							"value": "gg2+PlAmiuef7uHT4pdhEW/y7Z6UG35NUdt5puYAAAAJAAAAAFxDDAJyYXcAAAAAFVfwLBerPie4v1Ep////"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Using 360 fba calculator results match with Amazon when weight is greather than 150",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"let jsonRes = JSON.parse(responseBody);\r",
+							"let shortSide = pm.environment.get(\"SS\");\r",
+							"let medianSide = pm.environment.get(\"MS\");\r",
+							"let longestSide = pm.environment.get(\"LS\");\r",
+							"let weight = pm.environment.get(\"W\");\r",
+							"amazonFee = pm.environment.get(\"AMAZONFEE\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(`Using SS: ${shortSide}, MS: ${medianSide}, LS: ${longestSide} and  WEIGHT: ${weight}, FULFILLMENT FEE should be equal to: '${amazonFee}'`, () => {\r",
+							"    feeAct = parseFloat((jsonRes.fbaFee).toFixed(2));\r",
+							"    pm.expect(feeAct, 'Fulfillment fee not match').to.equal(amazonFee);\r",
+							"});\r",
+							"\r",
+							"console.log(`FULFILLMENT FEE from 360 FBA application: '${feeAct}'`)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"\",\n\t\"shortestSide\":{{SS}},\n\t\"medianSide\":{{MS}},\n\t\"longestSide\":{{LS}},\n\t\"weight\":{{W}}\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/calculator?marketplace=US&sizeUnit={{SIZEUNIT}}&weightUnit={{WEIGHTUNIT}}&dangerousGoods=false",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"calculator"
+					],
+					"query": [
+						{
+							"key": "marketplace",
+							"value": "US"
+						},
+						{
+							"key": "sizeUnit",
+							"value": "{{SIZEUNIT}}"
+						},
+						{
+							"key": "weightUnit",
+							"value": "{{WEIGHTUNIT}}"
+						},
+						{
+							"key": "dangerousGoods",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0bbfaf99-153d-473f-9e11-99137c28372a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "aff92332-9708-4b82-874d-bc5216f2fb93",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

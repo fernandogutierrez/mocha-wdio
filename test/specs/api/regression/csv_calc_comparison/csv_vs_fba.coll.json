@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "f77c7444-b9c4-48bb-9da0-6dda81f856c7",
+		"name": " XLS examp vs FBA 360 Calc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Calculate test collections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status code should be 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"if (responseCode.code !== 200) return;\r",
+							"\r",
+							"let resbdy = JSON.parse(responseBody);\r",
+							"feeAct = parseFloat((resbdy.fbaFee).toFixed(2));\r",
+							"feeExpc = parseFloat(data['FEE']);\r",
+							"sizeTierExpc = data['SizeTier'].trim(); \r",
+							"\r",
+							"if(sizeTierExpc == 'Standard'){\r",
+							"    sizeTierExpc = `Large ${sizeTierExpc}`\r",
+							"}\r",
+							"\r",
+							"if(sizeTierExpc == 'Oversize'){\r",
+							"    sizeTierExpc = `Small ${sizeTierExpc}`\r",
+							"} \r",
+							"\r",
+							"sizeTierAct = resbdy.sizeTier;\r",
+							"\r",
+							"pm.test(`FBA should be '${feeExpc}'`, () => {\r",
+							"    pm.expect(feeAct).to.eql(feeExpc);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Size Tier should be '${sizeTierExpc}'`, () => {\r",
+							"    pm.expect(sizeTierAct).to.eql(sizeTierExpc);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\":\"\",\r\n   \"medianSide\":{{medianSide}},\r\n   \"shortestSide\":{{shortestSide}},\r\n   \"weight\":{{weight}},\r\n   \"longestSide\":{{longestSide}}\r\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/calculator?marketplace=US&sizeUnit={{SIZEUNIT}}&weightUnit={{WEIGHTUNIT}}&dangerousGoods=false",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"calculator"
+					],
+					"query": [
+						{
+							"key": "marketplace",
+							"value": "US"
+						},
+						{
+							"key": "sizeUnit",
+							"value": "{{SIZEUNIT}}"
+						},
+						{
+							"key": "weightUnit",
+							"value": "{{WEIGHTUNIT}}"
+						},
+						{
+							"key": "dangerousGoods",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4a2ca00e-5c83-44bf-aa99-90c0896875fa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "42c720ae-c6ac-4387-94b6-c6247b53bdd4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

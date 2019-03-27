@@ -1,0 +1,58 @@
+{
+	"id": "89058889-0787-4f29-87e6-54e1e4027b7d",
+	"name": "FEE Calculation 2019 - Cloud env",
+	"values": [
+		{
+			"key": "TODAY",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "HOST",
+			"value": "https://qa.goja.io/fba/",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "LS",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "MS",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "SS",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "W",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "AMAZONFEE",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "WEIGHTUNIT",
+			"value": "LB",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "SIZEUNIT",
+			"value": "IN",
+			"type": "text",
+			"description": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-01-29T19:41:45.887Z",
+	"_postman_exported_using": "Postman/6.7.2"
+}

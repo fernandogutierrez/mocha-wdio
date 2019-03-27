@@ -1,0 +1,1763 @@
+{
+	"info": {
+		"_postman_id": "ca196902-1ebc-44b0-bc41-c68d47797424",
+		"name": "Negative Testing - Insert tables",
+		"description": "This suite of test cases is to test if the application returns 400 BAD REQUEST when data tables contains invalid data, so the system should not allow to insert this tables.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "400 Bad request is returned after sending only 'packageDimensions' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned after sending only 'packageDimensions' table\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request' \", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [],\n    \"fbaFeesDanger\": []\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned after sending only 'fbaFees' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned after sending only 'fbaFees' table\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request' \", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"2.48\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.19\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": []\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned after sending only 'fbaFeesDanger' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned after sending only 'fbaFeesDanger' table\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request' \", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [],\n    \"fbaFees\": [],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.45\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned after sending date time less than the stored in DB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned after sending date time less than the stored in DB\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{OLDDATE}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"2.48\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.19\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.45\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request when 'lowerLimit' is greater than upper limit in 'fbaFees' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when 'lowerLimit' is greater than upper limit in 'fbaFees' table\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"6925 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"2.48\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2020 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.19\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.45\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request when lowerLimit is greater than upperLimit in 'fbaFeesDanger' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when lowerLimit is greater than upperLimit in 'fbaFeesDanger' table\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"2.48\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.19\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.45\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"200 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"125 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when lowerLimit is equal to upperLimit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when lowerLimit is equal to upperLimit\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", () => {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"100 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.48\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.19\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.45\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"20 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when fixedCost is 'N/A'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when fixedCost is 'N/A'\", ()=> {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", ()=> {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"N/A\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"N/A\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"N/A\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"N/A\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"N/A\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"N/A\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when pWeight is 'N/A'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when pWeight is 'N/A'\", ()=> {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", ()=> {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							"let moment = require('moment');\r",
+							"let today = moment().format('YYYY-MM-D');\r",
+							"pm.environment.set(\"TODAY\", today)\r",
+							"console.log(pm.variables.get(\"TODAY\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Standard\",\n            \"longestSide\": \"18 in\",\n            \"medianSide\": \"14 in\",\n            \"shortestSide\": \"8 in\",\n            \"weight\": \"20 lb\",\n            \"lengthGirth\": \"N/A\"\n        },\n        {\n            \"nameProductSizeTier\": \"Small Oversize\",\n            \"longestSide\": \"60 in\",\n            \"medianSide\": \"30 in\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"70 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Medium Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"130 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Large Oversize\",\n            \"longestSide\": \"108 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"150 lb\",\n            \"lengthGirth\": \"165 lb\"\n        },\n        {\n            \"nameProductSizeTier\": \"Special Oversize\",\n            \"longestSide\": \"999999 in\",\n            \"medianSide\": \"N/A\",\n            \"shortestSide\": \"N/A\",\n            \"weight\": \"999999 lb\",\n            \"lengthGirth\": \"999999 lb\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"2.48\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.19\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.28\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"4.76\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.26\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"9.79\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"75.78\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"N/A\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"3.45\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0.625 lb\",\n            \"upperLimit\": \"1 lb\",\n            \"fixedCost\": \"4.01\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"1 lb\",\n            \"upperLimit\": \"2 lb\",\n            \"fixedCost\": \"5.23\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"2 lb\",\n            \"upperLimit\": \"3 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"3 lb\",\n            \"upperLimit\": \"20 lb\",\n            \"fixedCost\": \"5.7\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"3 lb\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"N/A\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"N/A\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when 'fbaFees' table contains different sizeTiers than 'packageDimensions' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when 'fbaFees' table contains different sizeTiers than 'packageDimensions' table\", ()=> {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", ()=> {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							"generateRnd = () =>{",
+							"     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);",
+							"}",
+							"",
+							"pm.environment.set('RANDSTR1', generateRnd());",
+							"pm.environment.set('RANDSTR2', generateRnd());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"{{RANDSTR1}}\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"{{RANDSTR2}}\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"{{RANDSTR1}}\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when 'fbaFeesDanger' table contains different sizeTiers than 'packageDimensions' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when'fbaFeesDanger' table contains different sizeTiers than 'packageDimensions' table\", ()=> {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", ()=> {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							"generateRnd = () =>{ ",
+							"    return [...Array(15)].map(i=>(~~(Math.random()*36)).toString(36)).join('');",
+							"}",
+							"",
+							"pm.environment.set('RANDSTR1', generateRnd());",
+							"pm.environment.set('RANDSTR2', generateRnd());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"{{RANDSTR1}}\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"{{RANDSTR1}}\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"{{RANDSTR2}}\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when 'fbaFees' table contains more sizeTiers than 'packageDimensions' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when 'fbaFees' table contains more sizeTiers than 'packageDimensions' table\", ()=> {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", ()=> {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"137.32\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "400 Bad request is returned when 'fbaFeesDanger' table contains more sizeTiers than 'packageDimensions' table",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e8298f-562c-4181-a4af-b35a8cca6185",
+						"exec": [
+							"pm.test(\"400 Bad request should be returned when 'fbaFeesDanger' table contains more sizeTiers than 'packageDimensions' table\", ()=> {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should contain 'Bad Request'\", ()=> {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad Request\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3054a576-9609-47a2-a66f-c277809885c3",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "localTimezone",
+						"type": "text",
+						"value": "America/La_Paz"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "auth=eyJhbGciOiJIUzUxMiJ9.eyJ0eXAiOiJJRCIsImp0aSI6ImI0YjdiOWM4LTgxNjktNDNlMS05OTc2LWQ4N2NkNzAzMTZjOSIsImF1ZCI6IjM2MHNlbGxlciIsInN1YiI6IjhkNDkxMjgwLTMxNjktNDdhMS1hNjgyLTgwMDE5Zjc2MTY0ZCIsIm5hbWUiOiJ0ZXN0IHVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJmZXJuYW5kb2d1dGllcnJlejI3OUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoidGVzdCIsImZhbWlseV9uYW1lIjoidXNlciIsImVtYWlsIjoiZmVybmFuZG9ndXRpZXJyZXoyNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGVzIjpbImFkbWluIiwidXNlciJdfQ._WQVjBkIrCTg6nND5w06edPVAGTnGu2gVpLOSnb-Uu7aCqyf1DKv4DDRTLO40bI3I0uvjvIKUUJgdW-8SzVAFA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roundOutboundShippingWeight\": true,\n    \"startDate\": \"{{NEXTYEAR}}\",\n    \"packageDimensions\": [\n        {\n            \"nameProductSizeTier\": \"Small Standard\",\n            \"longestSide\": \"15 in\",\n            \"medianSide\": \"12 in\",\n            \"shortestSide\": \"0.75 in\",\n            \"weight\": \"0.75 lb\",\n            \"lengthGirth\": \"N/A\"\n        }\n    ],\n    \"fbaFees\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"100 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"2.41\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        }\n    ],\n    \"fbaFeesDanger\": [\n        {\n            \"sizeTier\": \"Small Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.27\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Standard\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"0.625 lb\",\n            \"fixedCost\": \"3.87\",\n            \"variableCost\": \"N/A\",\n            \"aboveFirst\": \"N/A\",\n            \"pWeight\": \"0.25 lb\"\n        },\n        {\n            \"sizeTier\": \"Small Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"70 lb\",\n            \"fixedCost\": \"8.98\",\n            \"variableCost\": \"0.38\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Medium Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"11.22\",\n            \"variableCost\": \"0.39\",\n            \"aboveFirst\": \"2 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Large Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"150 lb\",\n            \"fixedCost\": \"87.14\",\n            \"variableCost\": \"0.79\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        },\n        {\n            \"sizeTier\": \"Special Oversize\",\n            \"lowerLimit\": \"0 lb\",\n            \"upperLimit\": \"999999 lb\",\n            \"fixedCost\": \"157.12\",\n            \"variableCost\": \"0.91\",\n            \"aboveFirst\": \"90 lb\",\n            \"pWeight\": \"1 lb\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/fbafee",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"fbafee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update table FBA FEES",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "localTimezone",
+								"value": "America/La_Paz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fbaFees\" : [\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 2.41,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 2.48,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 0.625,\r\n            \"fixedCost\": 3.19,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0.625,\r\n            \"maxLb\": 1,\r\n            \"fixedCost\": 3.28,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 1,\r\n            \"maxLb\": 2,\r\n            \"fixedCost\": 4.76,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 2,\r\n            \"maxLb\": 3,\r\n            \"fixedCost\": 5.26,\r\n            \"packaging\": 0.25\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Standard\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 3,\r\n            \"maxLb\": 20,\r\n            \"fixedCost\": 5.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 0.25,\r\n            \"aboveFirst\": 3\r\n        },\r\n        {\r\n            \"sizeTier\": \"Small Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 70,\r\n            \"fixedCost\": 8.26,\r\n            \"variableCost\": 0.38,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Medium Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 9.79,\r\n            \"variableCost\": 0.39,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 2\r\n        },\r\n        {\r\n            \"sizeTier\": \"Large Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 150,\r\n            \"fixedCost\": 75.78,\r\n            \"variableCost\": 0.79,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        },\r\n        {\r\n            \"sizeTier\": \"Special Oversize\",\r\n            \"country\": \"United States\",\r\n            \"minLb\": 0,\r\n            \"maxLb\": 999999999,\r\n            \"fixedCost\": 137.32,\r\n            \"variableCost\": 0.91,\r\n            \"packaging\": 1,\r\n            \"aboveFirst\": 90\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/fbafee?startDate={{TODAY}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"fbafee"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "{{TODAY}}"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Jan 2019 19:49:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=iso-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate,no-cache,no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<html>\n    <head>\n        <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"/>\n        <title>Error 400 Bad Request</title>\n    </head>\n    <body>\n        <h2>HTTP ERROR 400</h2>\n        <p>Problem accessing /fbafee. Reason:\n\n            <pre>    Bad Request</pre>\n        </p>\n    </body>\n</html>"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "41026ea2-99ee-4e9a-9bb2-8d49a5ea02ff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "02590279-737d-4934-ab59-966ad1f5d4ed",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
