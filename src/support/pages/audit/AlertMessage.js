@@ -1,5 +1,5 @@
 import alertSelectors from '../../selectors/audit/alerts';
-import messageCons from '../alertMessagesConstants';
+import { ASIN_ADDED } from '../audit/audit_const';
 
 
 class AlertMessage{
@@ -15,12 +15,8 @@ class AlertMessage{
         return $(alertSelectors.alertMessage(this._description));
     }
 
-    get asinAddedDesc(){
-        return messageCons.ASINADDED;
-    }
-
     asinAddedIsDisplayed(){
-        this.description = this.asinAddedDesc;
+        this.description = ASIN_ADDED;
         return this.alertMessageControl.isDisplayedWithin(10000);
     }
 }

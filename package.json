@@ -13,9 +13,9 @@
     "@babel/register": "^7.0.0",
     "@types/chai": "^4.1.7",
     "@wdio/selenium-standalone-service": "^5.6.0",
+    "axios": "^0.18.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "grunt-mocha-cli": "^4.0.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "newman": "^4.4.0"
@@ -32,14 +32,10 @@
     "grunt-cli": "^1.3.2",
     "grunt-mocha": "^1.2.0",
     "grunt-mocha-test": "^0.13.3",
-    "grunt-simple-mocha": "^0.4.1",
     "grunt-webdriver": "^3.0.0",
-    "mocha-allure-reporter": "^1.4.0",
-    "mocha-better-spec-reporter": "^3.1.0",
     "mochawesome": "^3.1.1",
     "newman-reporter-htmlextra": "^1.6.6",
-    "selenium-standalone": "^6.15.6",
-    "wdio-mochawesome-reporter": "^2.0.1"
+    "selenium-standalone": "^6.15.6"
   },
   "author": "",
   "license": "ISC",

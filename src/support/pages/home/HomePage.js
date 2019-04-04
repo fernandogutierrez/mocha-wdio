@@ -7,20 +7,29 @@ class HomePage extends Page{
         return this;
     }
 
-    static get login(){
+    get login(){
         return $(homeSelectors.logIn);
     }
 
-    static get audit(){
+    get audit(){
         return $(homeSelectors.audit)
     }
 
+    get myAsins(){
+        return $(homeSelectors.myAsins)
+    }
+
     clickLogin(){
-        HomePage.login.click();
+        this.login.click();
     }
 
     clickAudit(){
-        HomePage.audit.click()
+        this.audit.click();
+        return this;
+    }
+
+    clickMyAsins(){
+        this.myAsins.click();
     }
 }
 

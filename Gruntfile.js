@@ -2,6 +2,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-webdriver');
     grunt.loadNpmTasks('grunt-mocha-test');
+
     grunt.registerTask('api', 'mochaTest');
     grunt.registerTask('ui', 'webdriver');
 
