@@ -59,7 +59,7 @@ module.exports = {
                 "dimensionalWeight": utility.getRndInt({ max: 20}),
                 "outboundShippingWeight": utility.getRndInt({ max: 30}),
                 "originalPrice": utility.getRndInt({ max: 38}),
-                "fullfilmentFee": utility.getRndInt({ max: 15}),
+                "fulfillmentFee": utility.getRndInt({ max: 15}),
                 "dangerousGoods": null
             }
         }
