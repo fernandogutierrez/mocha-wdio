@@ -7,6 +7,7 @@ import { ASIN_ADDED } from '../../../../src/support/pages/audit/audit_const';
 import asinActions from '../../../../src/actions/api/asin_actions';
 
 describe('webdriver.io pages', () => {
+
     before(() => {
         homePage.open()
                 .clickLogin();
@@ -47,5 +48,9 @@ describe('webdriver.io pages', () => {
         expect(auditPage.dimensionIsDisplayedAtRow(data),
             `Row with ${data.asin} not contains dimensions: ` +
             `${data.longestSide} - ${data.medianSide} - ${data.shortestSide} - ${data.weight}`).to.be.true;
+    });
+
+    afterEach(async () => {
+        await asinActions.removeAllAsinsFromToday();
     });
 });
