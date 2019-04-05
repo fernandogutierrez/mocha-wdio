@@ -1,10 +1,10 @@
-import homePage from '../../../../src/support/pages/home/HomePage';
-import loginPage from '../../../../src/support/pages/login/LoginPage';
-import auditPage from '../../../../src/support/pages/audit/AuditPage';
-import addAsinForm from '../../../../src/support/pages/audit/AddAsinFormPage';
-import alertMessage from '../../../../src/support/pages/audit/AlertMessage';
-import { ASIN_ADDED } from '../../../../src/support/pages/audit/audit_const';
-import asinActions from '../../../../src/actions/api/asin_actions';
+import homePage from "pages/home/HomePage";
+import loginPage from 'pages/login/LoginPage';
+import auditPage from 'pages/audit/AuditPage';
+import addAsinForm from 'pages/audit/AddAsinFormPage';
+import alertMessage from 'pages/audit/AlertMessage';
+import { ASIN_ADDED } from 'pages/audit/audit_const';
+import asinActions from 'actions/api/asin_actions';
 
 describe('webdriver.io pages', () => {
 
