@@ -8,5 +8,7 @@ module.exports = {
 
     getRndNumWithUnit: function (range, strArr) { return `${this.getRndInt(range)} ${_.sample(strArr)}` },
 
-    getCurrDate: strFormat => { return moment().format(strFormat || 'YYYY-MM-DD') }
+    getCurrDate: strFormat => { return moment().format(strFormat || 'YYYY-MM-DD') },
+
+    getFirstDayOfYear: strFormat => { return moment().startOf('year').format('YYYY-MM-DD') }
 };
