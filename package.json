@@ -27,6 +27,8 @@
     "@wdio/mocha-framework": "^5.6.0",
     "@wdio/spec-reporter": "^5.7.2",
     "@wdio/sync": "^5.6.0",
+    "axios": "^0.18.0",
+    "axios-debug-log": "^0.4.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "csvtojson": "^2.0.8",
     "grunt": "^1.0.3",
@@ -52,10 +54,16 @@
       ]
     ],
     "plugins": [
-      ["module-resolver", {
-        "root": ["./src", "./src/support"],
-        "alias": {  }
-      }]
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./src",
+            "./src/support"
+          ],
+          "alias": {}
+        }
+      ]
     ]
   }
 }
